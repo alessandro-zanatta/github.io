@@ -4,6 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zanatta Alessandro - Twist Performance Marketing</title>
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1692480875256573');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1692480875256573&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
@@ -993,6 +1010,25 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   var AUTOHIDE = Boolean(0);
 </script>
 <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+
+<script>
+  // Meta Pixel – evento Lead al successo del form Brevo
+  (function() {
+    var successPanel = document.getElementById('success-message');
+    if (!successPanel) return;
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+          if (successPanel.classList.contains('sib-form-message-panel--active')) {
+            if (typeof fbq === 'function') fbq('track', 'Lead');
+            observer.disconnect();
+          }
+        }
+      });
+    });
+    observer.observe(successPanel, { attributes: true });
+  })();
+</script>
 
 </body>
 </html>
