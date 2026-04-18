@@ -158,15 +158,34 @@
 
         /* ── STATS ── */
         .stats {
+            text-align: center;
+            padding: 48px 60px 80px;
+            background: #fff;
+        }
+        .stats-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            color: #1a1a2e;
+            margin-bottom: 48px;
+        }
+        .stats-grid {
             display: flex;
             justify-content: center;
             gap: 80px;
-            padding: 60px 40px;
-            background: #fff;
+            flex-wrap: wrap;
         }
-        .stat { text-align: center; }
-        .stat .number { font-size: 42px; font-weight: 700; color: #222; }
-        .stat .label { font-size: 15px; color: #666; margin-top: 4px; }
+        .stat { text-align: center; max-width: 280px; position: relative; }
+        .stat + .stat::before {
+            content: '';
+            position: absolute;
+            left: -40px;
+            top: 8%; height: 84%;
+            width: 1px;
+            background: rgba(26,26,46,0.1);
+        }
+        .stat .number { font-size: 52px; font-weight: 800; color: #1a1a2e; line-height: 1; }
+        .stat .label { font-size: 16px; font-weight: 700; color: #333; margin-top: 12px; margin-bottom: 10px; }
+        .stat .desc { font-size: 14px; color: #666; line-height: 1.65; }
 
         /* ── LOGOS TICKER ── */
         .logos {
@@ -198,7 +217,9 @@
             object-fit: contain;
             flex-shrink: 0;
         }
-        .logos-track img[alt="Oltre"] { height: 80px; }
+        .logos-track img[alt="Sky Fitness"] { height: 36px; }
+        .logos-track img[alt="Oltre"] { height: 100px; }
+        .logos-track img[alt="VitaeDNA"] { height: 72px; }
         @keyframes ticker {
             from { transform: translateX(0); }
             to   { transform: translateX(-50%); }
@@ -227,18 +248,27 @@
 
         /* ── TEAM ── */
         .team { background: #fff; padding: 80px 60px; text-align: center; }
-        .team h2 { font-family: 'Playfair Display', serif; font-size: 40px; margin-bottom: 8px; }
+        .team h2 { font-family: 'Playfair Display', serif; font-size: 40px; margin-bottom: 8px; color: #1a1a2e; }
         .team > p { color: #666; font-size: 15px; margin-bottom: 48px; }
         .team-grid {
             display: flex;
             justify-content: center;
-            gap: 50px;
+            gap: 24px;
             flex-wrap: wrap;
         }
-        .team-member { text-align: center; width: 200px; }
+        .team-member {
+            text-align: center;
+            width: 240px;
+            flex-shrink: 0;
+            background: #fff;
+            border: 1.5px solid rgba(108,99,255,0.25);
+            border-radius: 20px;
+            padding: 32px 20px 28px;
+            box-shadow: 0 2px 16px rgba(108,99,255,0.07);
+        }
         .team-avatar {
-            width: 130px; height: 130px; border-radius: 50%;
-            margin: 0 auto 14px;
+            width: 150px; height: 150px; border-radius: 50%;
+            margin: 0 auto 16px;
             overflow: hidden;
             border: 4px solid;
         }
@@ -246,8 +276,35 @@
         .team-avatar.purple { border-color: #9B59B6; }
         .team-avatar.gray { border-color: #bbb; }
         .team-avatar.dark { border-color: #444; }
-        .team-avatar img { width: 100%; height: 100%; object-fit: cover; }
-        .team-member h4 { font-size: 16px; margin-bottom: 4px; }
+        .team-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+        /* Dots indicator */
+        .team-dots { display: none; justify-content: center; gap: 8px; margin-top: 24px; }
+        .team-dot {
+            width: 9px; height: 9px; border-radius: 50%;
+            background: rgba(108,99,255,0.25);
+            transition: background .3s, transform .3s;
+            cursor: pointer;
+        }
+        .team-dot.active { background: #6C63FF; transform: scale(1.35); }
+        @media (max-width: 768px) {
+            .team { padding: 60px 0 48px; }
+            .team h2, .team > p { padding: 0 24px; }
+            .team-grid {
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                padding: 8px 32px 16px;
+                gap: 16px;
+                margin: 0;
+                scrollbar-width: none;
+            }
+            .team-grid::-webkit-scrollbar { display: none; }
+            .team-member { scroll-snap-align: center; width: 210px; }
+            .team-dots { display: flex; }
+        }
+        .team-member h4 { font-size: 16px; margin-bottom: 4px; color: #1a1a2e; }
         .team-member .role { font-size: 13px; color: #888; }
 
         /* ── METODO ── */
@@ -292,7 +349,6 @@
             background: #ede9ff;
             border-radius: 14px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 28px;
             flex-shrink: 0;
         }
         .metodo-step {
@@ -701,21 +757,23 @@
             box-shadow: none !important;
         }
         .contact-right .input:focus { border-color: #6C63FF !important; outline: none !important; }
-        /* Telefono — campo unico pulito, nessuna bandiera, stessa altezza dell'email */
+        /* Telefono — campo unico, allineato pixel-perfect all'email */
         .contact-right .sib-sms-tooltip { display: none !important; }
+        /* Wrapper: stessa margin-top di .entry__field (4px da Brevo) */
+        .contact-right .sib-sms-input-wrapper { margin-top: 4px !important; display: block !important; }
         .contact-right .sib-sms-select {
             display: block !important;
             border: none !important; background: none !important;
-            width: 100% !important; box-sizing: border-box !important;
+            width: 100% !important; margin: 0 !important; padding: 0 !important;
         }
         .contact-right .sib-sms-select__title { display: none !important; }
+        /* number-input: stesse dimensioni dell'input email (59px totale = 38 content + 18 padding + 3 border) */
         .contact-right .sib-sms-select__number-input {
             display: flex !important; align-items: center !important;
-            width: 100% !important; min-width: 0 !important;
-            padding: 9px 12px !important;
+            width: 100% !important; min-width: 0 !important; box-sizing: border-box !important;
+            height: 59px !important; padding: 9px 12px !important;
             border: 1.5px solid #e0e0e0 !important; border-radius: 8px !important;
-            background: #fff !important; box-sizing: border-box !important;
-            transition: border-color .2s !important;
+            background: #fff !important; transition: border-color .2s !important;
         }
         .contact-right .sib-sms-select__number-input:focus-within { border-color: #6C63FF !important; }
         .contact-right .sib-sms-select__calling-code { display: none !important; }
@@ -737,15 +795,20 @@
             margin-top: 4px !important;
         }
         .contact-right .sib-menu__select { display: none !important; }
-        .contact-right .sib-menu__item { border-radius: 6px !important; padding: 0 !important; }
+        .contact-right .sib-menu__item { border-radius: 6px !important; padding: 0 !important; overflow: hidden !important; background: transparent !important; border-left: none !important; }
+        .contact-right .sib-menu__item:hover,
+        .contact-right .sib-menu__item:focus { background: transparent !important; border-left: none !important; outline: none !important; }
+        .contact-right .entry__choice { background: transparent !important; border-left: none !important; border: none !important; }
+        .contact-right .entry__choice:hover { background: transparent !important; border-left: none !important; }
         .contact-right .sib-multiselect__label {
             display: flex !important; align-items: center !important; gap: 10px !important;
             padding: 9px 10px !important; cursor: pointer !important;
             font-size: 14px !important; color: #333 !important;
-            border-radius: 6px !important;
+            border-radius: 6px !important; background: transparent !important;
+            border-left: none !important;
         }
-        .contact-right .sib-multiselect__label:hover { background: #f5f4ff !important; }
-        .contact-right .checkbox { border: 1.5px solid #ddd !important; border-radius: 4px !important; width: 16px !important; height: 16px !important; }
+        .contact-right .sib-multiselect__label:hover { background: #f0eeff !important; }
+        .contact-right .checkbox { border: 1.5px solid #ddd !important; border-radius: 4px !important; width: 16px !important; height: 16px !important; flex-shrink: 0 !important; }
         .contact-right .sib-menu__apply { border-top: 1px solid #f0f0f0 !important; padding-top: 8px !important; margin-top: 6px !important; display: flex !important; flex-direction: row !important; align-items: center !important; justify-content: flex-end !important; gap: 8px !important; }
         .contact-right .sib-menu__cancel-button { color: #999 !important; font-size: 13px !important; padding: 6px 10px !important; }
         .contact-right .sib-menu__apply-button { background: #6C63FF !important; color: #fff !important; border-radius: 8px !important; padding: 7px 16px !important; font-size: 13px !important; font-weight: 600 !important; border: none !important; cursor: pointer !important; }
@@ -768,13 +831,60 @@
             .contact-right { flex: none; width: 100%; max-width: none; }
         }
 
+        /* ── VIDEO TESTIMONIALS ── */
+        .video-testimonials {
+            background: #fff;
+            padding: 80px 40px;
+            text-align: center;
+        }
+        .video-testimonials h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            color: #1a1a2e;
+            margin-bottom: 48px;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+        .video-card {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            background: #000;
+            box-shadow: 0 8px 32px rgba(0,0,0,.15);
+            cursor: pointer;
+        }
+        .video-card iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .video-testimonials { padding: 60px 24px; }
+            .video-testimonials h2 { font-size: 28px; margin-bottom: 32px; }
+            .video-grid { grid-template-columns: 1fr; gap: 20px; }
+        }
+
         /* ── RESPONSIVE ── */
         @media (max-width: 900px) {
             .header { padding: 14px 24px; }
             .nav-links { gap: 18px; }
             .about { flex-direction: column; padding: 60px 30px; }
             .about-img { flex: none; width: 100%; height: 350px; }
-            .stats { gap: 30px; flex-wrap: wrap; }
+            .stats { padding: 60px 30px; }
+            .stats-grid { gap: 40px; }
+            .stats-title { font-size: 30px; margin-bottom: 36px; }
+            .stat .number { font-size: 48px; }
+            .stat + .stat::before {
+                top: -20px; left: 8%;
+                width: 84%; height: 1px;
+            }
             .detailed-testimonial { flex-direction: column; padding: 40px 30px; }
             .detailed-testimonial .video-side { flex: none; width: 100%; height: 250px; }
             .footer { padding: 40px 30px; }
@@ -797,8 +907,8 @@
     <nav>
         <ul class="nav-links">
             <li><a href="#metodo">Metodo</a></li>
-            <li><a href="#chi-sono">Chi sono</a></li>
-            <li><a href="#contattami-form">Contattami</a></li>
+            <li><a href="#chi-sono">Il Team</a></li>
+            <li><a href="#contattami-form">Contattaci</a></li>
             <li><a href="#testimonianze">Testimonianze</a></li>
         </ul>
     </nav>
@@ -810,8 +920,8 @@
 <div class="mobile-menu" id="mobileMenu">
     <ul>
         <li><a href="#metodo">Metodo</a></li>
-        <li><a href="#chi-sono">Chi sono</a></li>
-        <li><a href="#contattami-form">Contattami</a></li>
+        <li><a href="#chi-sono">Il Team</a></li>
+        <li><a href="#contattami-form">Contattaci</a></li>
         <li><a href="#testimonianze">Testimonianze</a></li>
     </ul>
     <div class="mobile-cta">
@@ -826,19 +936,28 @@
     <a href="#contattami-form" class="btn-primary">Prenota la tua consulenza gratuita</a>
 </section>
 
-<!-- STATS -->
-<section class="stats">
-    <div class="stat">
-        <div class="number">5 🙋‍♂️</div>
-        <div class="label">Membri del Team</div>
-    </div>
-    <div class="stat">
-        <div class="number">25 🤝</div>
-        <div class="label">Aziende aiutate</div>
-    </div>
-    <div class="stat">
-        <div class="number">+1.000.000 💸</div>
-        <div class="label">Budget gestito in pubblicità</div>
+<!-- VIDEO TESTIMONIALS -->
+<section class="video-testimonials">
+    <h2>Cosa dicono i nostri clienti</h2>
+    <div class="video-grid">
+        <div class="video-card">
+            <iframe src="https://www.youtube-nocookie.com/embed/ZR7OqZOLuFc"
+                title="Testimonianza Giada Barzon"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-card">
+            <iframe src="https://www.youtube-nocookie.com/embed/4aU4qTt6IY0"
+                title="Testimonianza Stefano Fontanesi"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-card">
+            <iframe src="https://www.youtube-nocookie.com/embed/fT01oAb-I0s"
+                title="Testimonianza Martin Flamigni"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen loading="lazy"></iframe>
+        </div>
     </div>
 </section>
 
@@ -915,7 +1034,11 @@
     <div class="metodo-grid">
         <div class="metodo-card">
             <div class="metodo-card-header">
-                <div class="metodo-icon">🎯</div>
+                <div class="metodo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6C63FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+                    </svg>
+                </div>
                 <div class="metodo-step">01</div>
             </div>
             <h3>Strategia full-Funnel</h3>
@@ -923,7 +1046,11 @@
         </div>
         <div class="metodo-card">
             <div class="metodo-card-header">
-                <div class="metodo-icon">📣</div>
+                <div class="metodo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6C63FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
+                    </svg>
+                </div>
                 <div class="metodo-step">02</div>
             </div>
             <h3>Gestione Inserzioni</h3>
@@ -931,7 +1058,11 @@
         </div>
         <div class="metodo-card">
             <div class="metodo-card-header">
-                <div class="metodo-icon">✉️</div>
+                <div class="metodo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6C63FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                </div>
                 <div class="metodo-step">03</div>
             </div>
             <h3>Attività a supporto</h3>
@@ -969,27 +1100,18 @@
 </section>
 
 
-<!-- ABOUT -->
-<section class="about" id="chi-sono">
-    <div class="about-text">
-        <h2>About Alessandro</h2>
-        <p>Appassionato di Marketing dall'età di 15 anni, mi cimento da subito in libri di Dan Kannedy, Seth Godin, Philip Kotler &#x1F4DA;</p>
-        <p>A 16 anni comincio con le prime esperienze lavorative e inizio a bussare alle porte delle attività locali del mio paese &#x1F9D1;</p>
-        <p>Appena scopro che con le skills apprese potevo veramente impattare le aziende, mi verticalizzo sul Performance Marketing; a 19 anni apro subito partita IVA. Qui cominciano le prime sconfitte e le prime vittorie &#x1F680;</p>
-        <p>Arrivando ad oggi, grato di poter contribuire alla crescita di oltre 25 aziende in tutta Italia &#x1F1EE;&#x1F1F9;</p>
-        <a href="#contattami-form" class="btn-primary" style="margin-top: 16px;">Prenota una Chiamata con Alessandro</a>
-    </div>
-    <div class="about-img">
-        <img src="about-alessandro.jpg" alt="Alessandro Zanatta">
-    </div>
-</section>
-
-
 <!-- TEAM -->
-<section class="team">
+<section class="team" id="chi-sono">
     <h2>About the Team</h2>
-    <p>Scopri le menti brillanti che collaborano ai progetti</p>
+    <p>Scopri le menti che collaborano ai progetti</p>
     <div class="team-grid">
+        <div class="team-member">
+            <div class="team-avatar purple">
+                <img src="about-alessandro.jpg" alt="Alessandro Zanatta">
+            </div>
+            <h4>Alessandro Zanatta</h4>
+            <div class="role">Fondatore di Twist e Marketing Strategist</div>
+        </div>
         <div class="team-member">
             <div class="team-avatar blue">
                 <img src="dylan.jpg" alt="Dylan Benotto">
@@ -1019,8 +1141,37 @@
             <div class="role">Videomaker & Graphic designer</div>
         </div>
     </div>
+    <!-- Dot indicators (mobile only) -->
+    <div class="team-dots" id="teamDots">
+        <span class="team-dot active"></span>
+        <span class="team-dot"></span>
+        <span class="team-dot"></span>
+        <span class="team-dot"></span>
+        <span class="team-dot"></span>
+    </div>
 </section>
 
+<!-- STATS -->
+<section class="stats">
+    <h2 class="stats-title">I nostri numeri</h2>
+    <div class="stats-grid">
+        <div class="stat">
+            <div class="number">5</div>
+            <div class="label">Membri del Team</div>
+            <div class="desc">Le menti che lavorano con energia, dedizione ed entusiasmo sui nostri clienti.</div>
+        </div>
+        <div class="stat">
+            <div class="number">+25</div>
+            <div class="label">Aziende aiutate</div>
+            <div class="desc">Più di 25 aziende ci hanno dato fiducia per migliorare i propri risultati grazie al digitale.</div>
+        </div>
+        <div class="stat">
+            <div class="number">+2M€</div>
+            <div class="label">Budget gestito in ADV</div>
+            <div class="desc">Dal primo cliente ad oggi abbiamo gestito più di 2 milioni di euro in advertising, aumentando il fatturato dei clienti.</div>
+        </div>
+    </div>
+</section>
 
 <!-- CONTACT -->
 <section class="contact-section" id="contattami-form">
@@ -1314,7 +1465,7 @@
         <ul>
             <li><a href="#chi-sono">Alessandro</a></li>
             <li><a href="#metodo">Metodo</a></li>
-            <li><a href="#contattami-form">Contattami</a></li>
+            <li><a href="#contattami-form">Contattaci</a></li>
             <li><a href="#testimonianze">Casi Studio</a></li>
         </ul>
     </div>
@@ -1332,7 +1483,7 @@
                 <div class="profile-role">Co-Founder at Twist</div>
             </div>
         </div>
-        <a href="mailto:alessandro@twistgrowth.com" class="btn-footer">Contattami via email</a>
+        <a href="mailto:alessandro@twistgrowth.com" class="btn-footer">Contattaci via email</a>
     </div>
 </footer>
 
@@ -1485,6 +1636,32 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
       });
     }, { threshold: 0.1 });
     observer.observe(formSection);
+  })();
+
+  // Team carousel — sincronizza pallini con lo scroll
+  (function teamDots() {
+    var grid = document.querySelector('.team-grid');
+    var dots = document.querySelectorAll('.team-dot');
+    if (!grid || !dots.length) return;
+    function updateDots() {
+      var members = Array.from(grid.querySelectorAll('.team-member'));
+      var center = grid.getBoundingClientRect().left + grid.offsetWidth / 2;
+      var closest = 0, minDist = Infinity;
+      members.forEach(function(m, i) {
+        var r = m.getBoundingClientRect();
+        var dist = Math.abs(r.left + r.width / 2 - center);
+        if (dist < minDist) { minDist = dist; closest = i; }
+      });
+      dots.forEach(function(d, i) { d.classList.toggle('active', i === closest); });
+    }
+    grid.addEventListener('scroll', updateDots, { passive: true });
+    // Click on dot scrolls to that member
+    dots.forEach(function(dot, i) {
+      dot.addEventListener('click', function() {
+        var members = grid.querySelectorAll('.team-member');
+        if (members[i]) members[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      });
+    });
   })();
 
   // Fix placeholder campo telefono Brevo (da "SMS" a "+39 333 000 0000")
