@@ -277,6 +277,12 @@
         .team-avatar.gray { border-color: #bbb; }
         .team-avatar.dark { border-color: #444; }
         .team-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+        /* Fondatore: inquadra il volto */
+        .team-member:first-child .team-avatar img {
+            object-position: 42% 8%;
+            transform: scale(1.3);
+            transform-origin: 44% 22%;
+        }
         /* Dots indicator */
         .team-dots { display: none; justify-content: center; gap: 8px; margin-top: 24px; }
         .team-dot {
@@ -1088,7 +1094,7 @@
             </ul>
         </div>
         <div class="perchi-col no">
-            <h3><span class="col-icon">✕</span> Per chi non lo è</h3>
+            <h3><span class="col-icon">✕</span> Per chi non è</h3>
             <ul>
                 <li>Stai ancora cercando di capire se la tua offerta funziona</li>
                 <li>Non hai ancora investito nulla in pubblicità e preferisci aspettare</li>
@@ -1107,7 +1113,7 @@
     <div class="team-grid">
         <div class="team-member">
             <div class="team-avatar purple">
-                <img src="about-alessandro.jpg" alt="Alessandro Zanatta">
+                <img src="alessandrozanatta.jpg" alt="Alessandro Zanatta">
             </div>
             <h4>Alessandro Zanatta</h4>
             <div class="role">Fondatore di Twist e Marketing Strategist</div>
