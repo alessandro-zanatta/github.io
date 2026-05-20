@@ -100,11 +100,12 @@
         /* ── HERO ── */
         .hero {
             position: relative;
-            min-height: 560px;
+            min-height: 580px;
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: center;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
             text-align: left;
             color: #fff;
             overflow: hidden;
@@ -116,31 +117,116 @@
             content: '';
             position: absolute;
             top: 0; right: 0; bottom: 0;
-            left: 50%;
+            left: 45%;
             background: url('hero.jpg') 50% center / cover no-repeat;
-            filter: brightness(.62);
+            filter: brightness(.55);
             z-index: 0;
-            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%);
-            mask-image: linear-gradient(to right, transparent 0%, black 10%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%);
+            mask-image: linear-gradient(to right, transparent 0%, black 12%);
         }
         /* velo scuro esteso sull'immagine */
         .hero::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(to right, #1a1a2e 52%, rgba(26,26,46,.15) 100%);
+            background: linear-gradient(to right, #1a1a2e 48%, rgba(26,26,46,.25) 100%);
             z-index: 1;
         }
         .hero > * { position: relative; z-index: 2; }
-        .hero h1 { font-family: 'Playfair Display', serif; font-size: 52px; line-height: 1.1; margin-bottom: 16px; max-width: 46vw; }
-        .hero p { font-size: 18px; max-width: 40vw; opacity: .88; margin-bottom: 32px; }
+        /* colonna sinistra: testo */
+        .hero-content { flex: 1 1 auto; min-width: 0; }
+        .hero-content h1 { font-family: 'Playfair Display', serif; font-size: 52px; line-height: 1.1; margin-bottom: 16px; }
+        .hero-content p  { font-size: 18px; opacity: .88; margin-bottom: 0; }
+        /* colonna destra: form card */
+        .hero-form-card {
+            flex: 0 0 380px;
+            width: 380px;
+            background: #fff;
+            border-radius: 20px;
+            padding: 32px 28px;
+            box-shadow: 0 24px 70px rgba(0,0,0,.45);
+            color: #333;
+        }
+        .hero-form-card__title {
+            font-family: 'Inter', sans-serif;
+            font-size: 17px; font-weight: 700; color: #1a1a2e;
+            margin-bottom: 5px;
+        }
+        .hero-form-card__sub {
+            font-size: 13px; color: #888; margin-bottom: 20px; opacity: 1;
+        }
+        .hero-field { margin-bottom: 13px; }
+        .hero-field label {
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px; font-weight: 600;
+            letter-spacing: .7px; text-transform: uppercase;
+            color: #666; margin-bottom: 5px;
+        }
+        .hero-field input {
+            display: block; width: 100%; box-sizing: border-box;
+            border: 1.5px solid #e0e0e0; border-radius: 8px;
+            padding: 10px 13px;
+            font-family: 'Inter', sans-serif; font-size: 14px; color: #333;
+            background: #fff; transition: border-color .2s; outline: none;
+        }
+        .hero-field input:focus { border-color: #6C63FF; }
+        .hero-field input.h-error { border-color: #ff4949; }
+        .hero-form-card__btn {
+            display: block; width: 100%; box-sizing: border-box;
+            background: #6C63FF; color: #fff;
+            border: none; border-radius: 10px;
+            padding: 13px 20px; margin-top: 4px;
+            font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600;
+            cursor: pointer; transition: background .2s, transform .15s;
+            text-align: center;
+        }
+        .hero-form-card__btn:hover { background: #5a52e0; transform: translateY(-1px); }
+        .hero-form-card__btn:disabled { opacity: .7; cursor: not-allowed; transform: none; }
+        /* ADV pill buttons */
+        .hero-adv-group {
+            display: flex; flex-wrap: wrap; gap: 7px; margin-top: 5px;
+        }
+        .hero-adv-opt { display: contents; }
+        .hero-adv-opt input[type="radio"] { display: none; }
+        .hero-adv-opt span {
+            display: inline-block;
+            padding: 6px 12px;
+            border: 1.5px solid #e0e0e0; border-radius: 20px;
+            font-family: 'Inter', sans-serif; font-size: 12px; color: #555;
+            background: #fff; cursor: pointer;
+            transition: border-color .18s, background .18s, color .18s;
+            white-space: nowrap; user-select: none;
+        }
+        .hero-adv-opt span:hover { border-color: #6C63FF; color: #6C63FF; }
+        .hero-adv-opt input[type="radio"]:checked + span {
+            background: #6C63FF; border-color: #6C63FF; color: #fff; font-weight: 600;
+        }
+        .hero-form-msg {
+            margin-top: 14px; padding: 11px 14px;
+            border-radius: 8px; font-size: 13px; font-family: 'Inter', sans-serif;
+        }
+        .hero-form-msg--ok  { background: #e7faf0; color: #085229; border: 1px solid #13ce66; }
+        .hero-form-msg--err { background: #ffeded; color: #661d1d; border: 1px solid #ff4949; }
+        @media (max-width: 960px) {
+            .hero { padding: 60px 40px; gap: 40px; }
+            .hero-content h1 { font-size: 40px; }
+            .hero-form-card { flex: 0 0 340px; width: 340px; }
+        }
         @media (max-width: 768px) {
-            .hero { padding: 60px 30px; min-height: auto; }
-            .hero::before { -webkit-mask-image: none; mask-image: none; filter: brightness(.25); }
-            .hero::after { background: rgba(26,26,46,.55); }
-            .hero h1 { font-size: 36px; max-width: 100%; }
-            .hero p { max-width: 100%; }
-            .hero .btn-primary { width: 100%; text-align: center; }
+            .hero {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 50px 24px 40px;
+                gap: 32px;
+                min-height: auto;
+            }
+            .hero::before { left: 0; -webkit-mask-image: none; mask-image: none; filter: brightness(.22); }
+            .hero::after  { background: rgba(26,26,46,.60); }
+            .hero-content h1 { font-size: 32px; }
+            .hero-content p  { font-size: 16px; }
+            .hero-form-card { flex: none; width: 100%; padding: 24px 20px; }
+            .hero-field input { font-size: 16px !important; }
         }
         .btn-primary {
             display: inline-block;
@@ -1063,9 +1149,51 @@
 
 <!-- HERO -->
 <section class="hero">
-    <h1>Un sistema di <span style="color:#6C63FF">acquisizione clienti</span> performante, su misura per la tua azienda</h1>
-    <p>Aiutiamo aziende del Fitness e Benessere a realizzare un sistema di acquisizione clienti, smettendo di sprecare budget e iniziando finalmente a scalare con metodo.</p>
-    <a href="#contattami-form" class="btn-primary">Prenota la tua consulenza gratuita</a>
+    <!-- colonna sinistra: testo -->
+    <div class="hero-content">
+        <h1>Un sistema di <span style="color:#6C63FF">acquisizione clienti</span> performante, su misura per la tua azienda</h1>
+        <p>Aiutiamo aziende del Fitness e Benessere a realizzare un sistema di acquisizione clienti, smettendo di sprecare budget e iniziando finalmente a scalare con metodo.</p>
+    </div>
+
+    <!-- colonna destra: form card -->
+    <div class="hero-form-card">
+        <p class="hero-form-card__title">Prenota la tua analisi gratuita</p>
+        <p class="hero-form-card__sub">Compila il form, ti ricontattiamo entro 24 ore.</p>
+        <form id="hero-contact-form" novalidate>
+            <div class="hero-field">
+                <label for="h-nome">Nome e Cognome *</label>
+                <input type="text" id="h-nome" name="nome" placeholder="Mario Rossi" autocomplete="name">
+            </div>
+            <div class="hero-field">
+                <label for="h-email">Email *</label>
+                <input type="email" id="h-email" name="email" placeholder="mario@tuonegozio.it" autocomplete="email">
+            </div>
+            <div class="hero-field">
+                <label for="h-tel">Telefono *</label>
+                <input type="tel" id="h-tel" name="tel" placeholder="333 000 0000" autocomplete="tel">
+            </div>
+            <div class="hero-field">
+                <label for="h-azienda">Azienda *</label>
+                <input type="text" id="h-azienda" name="azienda" placeholder="Il tuo negozio o brand" autocomplete="organization">
+            </div>
+            <div class="hero-field">
+                <label>Spesa mensile in advertising</label>
+                <div class="hero-adv-group">
+                    <label class="hero-adv-opt"><input type="radio" name="h-adv" value="€0-€5.000"><span>€0 – €5.000</span></label>
+                    <label class="hero-adv-opt"><input type="radio" name="h-adv" value="€5.000-€10.000"><span>€5.000 – €10.000</span></label>
+                    <label class="hero-adv-opt"><input type="radio" name="h-adv" value="€10.000-€50.000"><span>€10.000 – €50.000</span></label>
+                    <label class="hero-adv-opt"><input type="radio" name="h-adv" value="+€50.000"><span>+€50.000</span></label>
+                </div>
+            </div>
+            <button type="submit" class="hero-form-card__btn">Prenota un'analisi gratuita →</button>
+        </form>
+        <div id="hero-form-success" class="hero-form-msg hero-form-msg--ok" style="display:none">
+            ✅ Richiesta inviata! Ti contatteremo entro 24 ore.
+        </div>
+        <div id="hero-form-error" class="hero-form-msg hero-form-msg--err" style="display:none">
+            ⚠️ Qualcosa è andato storto. Riprova tra qualche secondo.
+        </div>
+    </div>
 </section>
 
 <!-- VIDEO TESTIMONIALS -->
@@ -1620,6 +1748,91 @@
     </div>
 </footer>
 
+<!-- Hero form -->
+<script>
+(function() {
+  var form    = document.getElementById('hero-contact-form');
+  var btnEl   = form ? form.querySelector('.hero-form-card__btn') : null;
+  var successEl = document.getElementById('hero-form-success');
+  var errorEl   = document.getElementById('hero-form-error');
+  if (!form) return;
+
+  var WEBHOOK = 'https://hook.eu1.make.com/dm1pwwejy2j9whq6bsw4bvojfzo7ewdf';
+
+  function showMsg(el) {
+    if (successEl) successEl.style.display = 'none';
+    if (errorEl)   errorEl.style.display   = 'none';
+    if (el) el.style.display = 'block';
+  }
+
+  function validate() {
+    var valid = true;
+    var fields = [
+      { el: document.getElementById('h-nome'),   check: function(v){ return v.trim().length >= 2; } },
+      { el: document.getElementById('h-email'),  check: function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); } },
+      { el: document.getElementById('h-tel'),    check: function(v){ return v.replace(/\D/g,'').length >= 9; } },
+      { el: document.getElementById('h-azienda'),check: function(v){ return v.trim().length >= 1; } }
+    ];
+    fields.forEach(function(f) {
+      if (!f.el) return;
+      var ok = f.check(f.el.value);
+      f.el.classList.toggle('h-error', !ok);
+      if (!ok) valid = false;
+    });
+    return valid;
+  }
+
+  // Rimuovi errore al primo keystroke
+  form.querySelectorAll('input').forEach(function(inp) {
+    inp.addEventListener('input', function() { inp.classList.remove('h-error'); });
+  });
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (!validate()) return;
+
+    var nomeVal   = document.getElementById('h-nome').value.trim();
+    var nameParts = nomeVal.split(/\s+/);
+    var tel       = document.getElementById('h-tel').value.trim();
+    var digits    = tel.replace(/\D/g, '');
+
+    var advEl = form.querySelector('input[name="h-adv"]:checked');
+    var payload = {
+      email:     document.getElementById('h-email').value.trim(),
+      firstname: nameParts[0] || '',
+      lastname:  nameParts.slice(1).join(' ') || '',
+      company:   document.getElementById('h-azienda').value.trim(),
+      phone:     digits.startsWith('39') ? digits : '39' + digits,
+      adv:       advEl ? advEl.value : '',
+      source:    'hero_form'
+    };
+
+    btnEl.disabled = true;
+    btnEl.textContent = 'Invio in corso…';
+
+    fetch(WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function(res) {
+      if (res.ok) {
+        form.style.display = 'none';
+        showMsg(successEl);
+        if (typeof fbq === 'function') fbq('track', 'SubmitApplication');
+      } else {
+        throw new Error('HTTP ' + res.status);
+      }
+    })
+    .catch(function() {
+      btnEl.disabled = false;
+      btnEl.textContent = 'Prenota una Consulenza →';
+      showMsg(errorEl);
+    });
+  });
+})();
+</script>
+
 <!-- Smooth scroll + Carousel -->
 <script>
 // Smooth scroll (compatibile con tutti i browser mobile)
@@ -2168,7 +2381,27 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
       s.style.cssText = prev;
     });
 
-    setTimeout(showPopup, 15000);
+    // Mostra il popup solo quando ENTRAMBE le condizioni sono soddisfatte:
+    // • almeno 20 secondi di permanenza sulla pagina
+    // • almeno il 30% della pagina scrollata
+    var timerDone  = false;
+    var scrollDone = false;
+    function tryShowPopup() {
+      if (timerDone && scrollDone) {
+        window.removeEventListener('scroll', onScroll);
+        showPopup();
+      }
+    }
+    setTimeout(function() { timerDone = true; tryShowPopup(); }, 20000);
+    function onScroll() {
+      var scrolled = window.scrollY || window.pageYOffset;
+      var total    = document.documentElement.scrollHeight - window.innerHeight;
+      if (total > 0 && scrolled / total >= 0.30) {
+        scrollDone = true;
+        tryShowPopup();
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
 
   })();
 
