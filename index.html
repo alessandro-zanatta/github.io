@@ -135,8 +135,8 @@
         .hero > * { position: relative; z-index: 2; }
         /* colonna sinistra: testo */
         .hero-content { flex: 1 1 auto; min-width: 0; }
-        .hero-content h1 { font-family: 'Playfair Display', serif; font-size: 52px; line-height: 1.1; margin-bottom: 16px; }
-        .hero-content p  { font-size: 18px; opacity: .88; margin-bottom: 0; }
+        .hero-content h1 { font-family: 'Playfair Display', serif; font-size: 52px; line-height: 1.1; margin-bottom: 16px; max-width: 740px; }
+        .hero-content p  { font-size: 18px; opacity: .88; margin-bottom: 0; max-width: 640px; }
         /* colonna destra: form card */
         .hero-form-card {
             flex: 0 0 380px;
@@ -1185,7 +1185,7 @@
                     <label class="hero-adv-opt"><input type="radio" name="h-adv" value="+€50.000"><span>+€50.000</span></label>
                 </div>
             </div>
-            <button type="submit" class="hero-form-card__btn">Prenota un'analisi gratuita →</button>
+            <button type="submit" class="hero-form-card__btn">Prenota l'analisi gratuita →</button>
         </form>
         <div id="hero-form-success" class="hero-form-msg hero-form-msg--ok" style="display:none">
             ✅ Richiesta inviata! Ti contatteremo entro 24 ore.
@@ -1523,41 +1523,29 @@
                   </div>
                 </div>
                 <div style="padding:8px 0">
-                  <div class="sib-multiselect sib-multiselect-multichoice sib-form--blockPosition sib-form-block" data-required="false">
-                    <div class="form__entry">
+                  <div class="sib-form-block">
+                    <div class="form__entry entry_block">
                       <div class="form__label-row">
-                        <label class="entry__label" for="lists">Spesa mensile in advertising</label>
+                        <label class="entry__label">Spesa mensile in advertising</label>
                         <div class="entry__field">
-                          <div class="input input_display input--multiselect input--centerText">0 selezionati</div>
-                          <input id="lists" class="input" name="ADV[]" type="hidden" value="[]"/>
+                          <div class="hero-adv-group" style="margin-top:4px">
+                            <label class="hero-adv-opt"><input type="radio" name="sib-adv" value="€0-€5000"><span>€0 – €5.000</span></label>
+                            <label class="hero-adv-opt"><input type="radio" name="sib-adv" value="€5000-€10.000"><span>€5.000 – €10.000</span></label>
+                            <label class="hero-adv-opt"><input type="radio" name="sib-adv" value="€10.000-€50.000"><span>€10.000 – €50.000</span></label>
+                            <label class="hero-adv-opt"><input type="radio" name="sib-adv" value="+€50.000"><span>+€50.000</span></label>
+                          </div>
                         </div>
-                      </div>
-                      <label class="entry__error entry__error--primary"></label>
-                    </div>
-                    <div class="sib-menu" style="text-align:left">
-                      <div class="sib-menu__select sib-menu__selectTextAlign">
-                        <button type="button" class="clickable_link sib-menu__select-all-button">Seleziona tutto</button>
-                        <span class="sib-menu__separator">/</span>
-                        <button type="button" class="clickable_link sib-menu__clear-button">Cancella</button>
-                      </div>
-                      <ul class="sib-menu__item-list">
-                        <li class="sib-menu__item"><div class="entry__choice"><label class="sib-multiselect__label"><input type="checkbox" class="input_replaced" data-value="€0-€5000"><span class="checkbox checkbox_tick_positive"></span><span class="sib-multiselect__label-text">€0 – €5.000</span></label></div></li>
-                        <li class="sib-menu__item"><div class="entry__choice"><label class="sib-multiselect__label"><input type="checkbox" class="input_replaced" data-value="€5000-€10.000"><span class="checkbox checkbox_tick_positive"></span><span class="sib-multiselect__label-text">€5.000 – €10.000</span></label></div></li>
-                        <li class="sib-menu__item"><div class="entry__choice"><label class="sib-multiselect__label"><input type="checkbox" class="input_replaced" data-value="€10.000-€50.000"><span class="checkbox checkbox_tick_positive"></span><span class="sib-multiselect__label-text">€10.000 – €50.000</span></label></div></li>
-                        <li class="sib-menu__item"><div class="entry__choice"><label class="sib-multiselect__label"><input type="checkbox" class="input_replaced" data-value="+€50.000"><span class="checkbox checkbox_tick_positive"></span><span class="sib-multiselect__label-text">+€50.000</span></label></div></li>
-                      </ul>
-                      <div class="sib-menu__apply">
-                        <button type="button" class="sib-menu__cancel-button clickable_link">Annulla</button>
-                        <button type="button" class="sib-menu__apply-button clickable_button">Applica</button>
                       </div>
                     </div>
                   </div>
+                  <!-- campo nascosto: invia il valore al server Brevo nel formato JSON atteso -->
+                  <input type="hidden" id="lists" name="ADV[]" value="[]">
                 </div>
                 <div style="padding:8px 0">
                   <div class="sib-form-block" style="text-align:left">
                     <button class="sib-form-block__button sib-form-block__button-with-loader" form="sib-form" type="submit">
                       <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512"><path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z"/></svg>
-                      Prenota una Consulenza →
+                      Prenota la consulenza →
                     </button>
                   </div>
                 </div>
@@ -1826,7 +1814,7 @@
     })
     .catch(function() {
       btnEl.disabled = false;
-      btnEl.textContent = 'Prenota una Consulenza →';
+      btnEl.textContent = 'Prenota l\'analisi gratuita →';
       showMsg(errorEl);
     });
   });
@@ -2406,15 +2394,15 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   })();
 
   // ADV multiselect: auto-applica la scelta senza dover cliccare "Applica"
-  (function advAutoApply() {
-    var advMenu = document.querySelector('#sib-form .sib-multiselect .sib-menu');
-    if (!advMenu) return;
-    advMenu.addEventListener('click', function(e) {
-      if (!e.target.closest('.sib-menu__item')) return;
-      setTimeout(function() {
-        var applyBtn = advMenu.querySelector('.sib-menu__apply-button');
-        if (applyBtn) applyBtn.click();
-      }, 80);
+  // Sincronizza i pill radio del form contatti con il campo nascosto ADV[]
+  // (il server Brevo si aspetta un array JSON, es. ["€0-€5000"])
+  (function sibAdvSync() {
+    var hiddenAdv = document.getElementById('lists');
+    if (!hiddenAdv) return;
+    document.querySelectorAll('input[name="sib-adv"]').forEach(function(radio) {
+      radio.addEventListener('change', function() {
+        hiddenAdv.value = JSON.stringify([this.value]);
+      });
     });
   })();
 
